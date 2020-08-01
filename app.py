@@ -2,6 +2,8 @@ from flask import Flask, jsonify, request
 from datetime import datetime, timedelta
 import time
 import sys
+import schedule
+import datetime
 app = Flask(__name__)
 
 blacklisted_ip=[]
@@ -10,17 +12,19 @@ passwd='heyhey'
 x={} # Stores the fields for the GET requests
 y={} # Stores the fields for the POST requests
 req=3 #maximum number of requests allowed per user
+
+
 @app.route('/', methods=['GET','POST'])
 def get_tasks():
-    if request.method=='GET':
+    if request.method=='GET' and request.environ['REMOTE_ADDR'] not in blacklisted_ip:
         print(request.remote_addr)
         global req
         while(req>0):
             req-=1
-            if request.environ.get('HTTP_X_FORWARDED_FOR') and req:
+            if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
                 x={'ip': request.environ['REMOTE_ADDR'],'username':usrname,'passwd':passwd, 'timestamp':time.time()}
-                print(x)
-                print(req)
+                #print(x)
+                #print(req)
                 return jsonify(x),200
             else:
                 y={'ip':request.environ['HTTP_X_FORWARDED_FOR']}
@@ -31,17 +35,17 @@ def get_tasks():
                 blacklisted_ip.append(t)
             print(blacklisted_ip)
             return sys.exit()
+
+    
     elif request.method=='POST':
         while(req>0):
             req-=1
-            if t not in blacklisted_ip:
-                blacklisted_ip.append(t)
-            print(blacklisted_ip)
-            return 'success'
+            return 'success',200
         else:
             return sys.exit()
+    else:
+        return sys.exit()
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
