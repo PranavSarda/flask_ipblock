@@ -24,10 +24,12 @@ success --> if the POST request was successful
 
      
      
+      
+     flask run
+     
      curl -X POST http://127.0.0.1:5000/
      
      curl -X GET http://127.0.0.1:5000/
-     
-     flask run
+    
      
    
