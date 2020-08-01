@@ -11,7 +11,7 @@ USAGE:
 --> Open up two terminal tabs on the machine.
 
 
---> Run the flask server on one terminal window (flask run)
+--> Run the flask server on one terminal window
 
 
 --> Run the aforesaid commands to make requests.
@@ -27,5 +27,7 @@ success --> if the POST request was successful
      curl -X POST http://127.0.0.1:5000/
      
      curl -X GET http://127.0.0.1:5000/
+     
+     flask run
      
    
