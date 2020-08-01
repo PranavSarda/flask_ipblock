@@ -3,8 +3,14 @@
 Open Source Python Utility to limit the number of requests made to a server from a particular IP address, hence preventing bruteforce attacks.
 
 
+
+
 Commands for making requests:
+
+
 curl -X POST http://127.0.0.1:5000/
+
+
 
 curl -X GET http://127.0.0.1:5000/
 
