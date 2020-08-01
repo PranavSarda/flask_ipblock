@@ -24,10 +24,9 @@ USAGE:
 
 --> Run the aforesaid commands to make requests.
 
-
-
-O/P: {"ip":"127.0.0.1","passwd":"<password>","timestamp":1596310199.211749,"username":"<username>"} ---> if the GET request was successful
      
      success --> if the POST request was successful
+     
+     O/P: {"ip":"127.0.0.1","passwd":"<password>","timestamp":1596310199.211749,"username":"<username>"} ---> if the GET request was successful
   
      curl: (52) Empty reply from server --> if the request limit has reached.
