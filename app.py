@@ -16,11 +16,11 @@ def get_tasks():
         print(request.remote_addr)
         global req
         while(req>0):
-           req-=1
-            if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+            req-=1
+            if request.environ.get('HTTP_X_FORWARDED_FOR') and req:
                 x={'ip': request.environ['REMOTE_ADDR'],'username':usrname,'passwd':passwd, 'timestamp':time.time()}
-                #print(x)
-                #print(req)
+                print(x)
+                print(req)
                 return jsonify(x),200
             else:
                 y={'ip':request.environ['HTTP_X_FORWARDED_FOR']}
@@ -34,6 +34,9 @@ def get_tasks():
     elif request.method=='POST':
         while(req>0):
             req-=1
+            if t not in blacklisted_ip:
+                blacklisted_ip.append(t)
+            print(blacklisted_ip)
             return 'success'
         else:
             return sys.exit()
@@ -41,3 +44,4 @@ def get_tasks():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
