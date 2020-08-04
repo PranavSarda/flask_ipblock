@@ -14,7 +14,7 @@ usrname='<username>' #Take this as form input if you want (hard coded for now)
 passwd='<password>'  #Take this as form input if you want (hard coded for now)
 x={} # Stores the fields for the GET requests
 req=3 #maximum number of requests allowed per user, alter this according to your own convenience.
-header_vals=[] # stores the HTTP header USER AGENT
+header_vals=[] # stores the HTTP header USER AGENT for now, you may add addtional headers to the list.
 
 
 @app.route('/', methods=['GET','POST'])
@@ -29,9 +29,6 @@ def get_tasks():
                 req-=1
                 if request.environ['REMOTE_ADDR'] is not None:
                     x={'ip': request.environ['REMOTE_ADDR'],'username':usrname,'passwd':passwd, 'timestamp':time.time()}
-                    #print(x)
-                    #print(req)
-                    #print(header_vals)
                     return jsonify(x),200
                 else:
                     x={'ip':request.environ['HTTP_X_FORWARDED_FOR']}
@@ -40,7 +37,6 @@ def get_tasks():
                 t=request.environ['REMOTE_ADDR']
                 if t not in blacklisted_ip:
                     blacklisted_ip.append(t)
-                #print(blacklisted_ip)
             
                 return sys.exit()
 
@@ -53,7 +49,6 @@ def get_tasks():
             t=request.environ['REMOTE_ADDR']
             if t not in blacklisted_ip:
                 blacklisted_ip.append(t)
-            #print(blacklisted_ip)
             
             return sys.exit()
 
