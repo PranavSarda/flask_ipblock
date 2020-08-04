@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 import time
 import sys
 import schedule
-import datetime
 
 app = Flask(__name__)
 
